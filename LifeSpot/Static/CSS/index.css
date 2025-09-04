@@ -1,0 +1,84 @@
+/* Общие стили для body */
+body {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-areas:
+        "sidebar header"
+        "sidebar main"
+        "sidebar footer";
+    grid-template-columns: 10% 1fr;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+    padding-left: 11%; /* Оригинальное свойство из вашего кода */
+}
+
+/* Стили для header */
+header {
+    grid-area: header;
+    padding: 1rem;
+    padding-left: 1%; /* Оригинальное свойство */
+}
+
+/* Стили панели навигации */
+.navbar p{
+    color: darkgray;
+    padding-left: 15%;
+ }
+ /* Стили панели навигации при наведении мышью */
+ .navbar p:hover{
+    color: aliceblue;
+ }
+
+/* Стили для sidebar */
+aside {
+    grid-area: sidebar;
+    height: 100%;
+    width: 10%;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+/* Стили для main content */
+main {
+    grid-area: main;
+    padding: 1rem;
+}
+
+/* Стили для footer */
+footer {
+    grid-area: footer;
+    padding: 1rem;
+    position: absolute; /* Оригинальное свойство */
+    bottom: 0; /* Оригинальное свойство */
+}
+
+/* Стили для контейнеров с видео */
+.video-container {
+    display: inline-block;
+    padding-left: 1%;
+}
+
+/* Стили для заголовков видео */
+.video-title {
+    /* Добавьте стили для заголовков видео при необходимости */
+}
+
+/* Убираем границу у iframe */
+iframe {
+    border: none;
+}
+
+/* Стили для bordered контейнера */
+.bordered {
+    /* Добавьте стили для bordered контейнера при необходимости */
+}
+/* Комбинированный селектор - применяется ко всем элементам */
+header,footer,aside,body,.navbar,.video-container{
+    font-family: "Helvetica 65 Medium", sans-serif;
+ }

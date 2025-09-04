@@ -1,4 +1,6 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using Microsoft.Extensions.FileProviders;
+
+var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -6,7 +8,12 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
-app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "Static")),
+    RequestPath = "/Static"
+});
 
 app.MapGet("/", async context =>
 {
