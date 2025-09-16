@@ -1,3 +1,7 @@
+header, footer, body, .video-container {
+    background-color: linen;
+}
+
 /* Простые селекторы*/
 .video-container {
     display: inline-block;
@@ -5,21 +9,36 @@
     padding-top: 1%;
 }
 
-.navbar {
+/* Стили панели навигации */
+.navbar p {
     color: darkgray;
     padding-left: 15%;
 }
+    /* Стили панели навигации при наведении мышью */
+.navbar p:hover {
+        color: aliceblue;
+    }
 
+/*Глобальные стили для хедеров на всём сайте*/
 header {
+    color: black;
     padding-left: 1%;
     padding-top: 1.2%;
 }
+/*Стиль хедера для главной страницы имеет приоритет,
+так как используется селектор по идентификатору*/
+#header-index {
+    color: #44453f;
+}
 
+/* Стили футера */
 footer {
     position: absolute;
     bottom: 0;
     font-size: medium;
     color: dimgrey;
+    line-height: 66%;
+    padding-left: 1%;
 }
 
 aside {
