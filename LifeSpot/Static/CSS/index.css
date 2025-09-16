@@ -57,3 +57,18 @@ aside {
 body {
     padding-left: 11%;
 }
+
+/* Стили для контейнера поиска */
+.search-container {
+    margin-top: 20px;
+    padding: 10px;
+}
+
+/* Стили для поля ввода */
+#search-field {
+    padding: 8px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+

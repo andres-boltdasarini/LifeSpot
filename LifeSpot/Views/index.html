@@ -9,10 +9,13 @@
 <body>
     <!--Хедер страницы находится сразу над тегом body-->
     <header id="header-index">
-        <!--Заголовок страницы-->
         <h1>LifeSpot - прямые трансляции с улиц</h1>
-        <!--Параграф-->
         <p>Покажем, что происходит прямо сейчас</p>
+        <!-- Добавленная форма поиска -->
+        <div class="search-container">
+            <input type="text" id="search-field" placeholder="Поиск трансляций...">
+            <button onclick="search()">Найти</button>
+        </div>
     </header>
     <div class="bordered">
         <div class="video-container">
