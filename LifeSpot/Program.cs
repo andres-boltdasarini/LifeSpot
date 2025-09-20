@@ -1,4 +1,10 @@
-﻿using Microsoft.Extensions.FileProviders;
+﻿using System.IO;
+using System.Text;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
@@ -7,27 +13,47 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
+app.UseRouting();
 
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "Static")),
-    RequestPath = "/Static"
-});
-
+// Загружаем отдельные элементы для вставки в шаблон: боковое меню и футер
+string footerHtml = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "Views", "Shared", "footer.html"));
+string sideBarHtml = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "Views", "Shared", "sideBar.html"));
 
 app.MapGet("/", async context =>
 {
     var viewPath = Path.Combine(Directory.GetCurrentDirectory(), "Views", "index.html");
-    var html = await File.ReadAllTextAsync(viewPath);
-    await context.Response.WriteAsync(html);
+
+    // Загружаем шаблон страницы, вставляя в него элементы
+    var html = new StringBuilder(await File.ReadAllTextAsync(viewPath))
+        .Replace("<!--SIDEBAR-->", sideBarHtml)
+        .Replace("<!--FOOTER-->", footerHtml);
+
+    await context.Response.WriteAsync(html.ToString());
 });
+app.MapGet("/testing", async context =>
+{
+    var viewPath = Path.Combine(Directory.GetCurrentDirectory(), "Views", "testing.html");
+
+    // Загружаем шаблон страницы, вставляя в него элементы
+    var html = new StringBuilder(await File.ReadAllTextAsync(viewPath))
+        .Replace("<!--SIDEBAR-->", sideBarHtml)
+        .Replace("<!--FOOTER-->", footerHtml);
+
+    await context.Response.WriteAsync(html.ToString());
+});
+
 app.MapGet("/Static/CSS/index.css", async context =>
 {
     // по аналогии со страницей Index настроим на нашем сервере путь до страницы со стилями, чтобы браузер знал, откуда их загружать
     var cssPath = Path.Combine(Directory.GetCurrentDirectory(), "Static", "CSS", "index.css");
     var css = await File.ReadAllTextAsync(cssPath);
     await context.Response.WriteAsync(css);
+});
+app.MapGet("/Static/JS/index.js", async context =>
+{
+    var jsPath = Path.Combine(Directory.GetCurrentDirectory(), "Static", "JS", "index.js");
+    var js = await File.ReadAllTextAsync(jsPath);
+    await context.Response.WriteAsync(js);
 });
 
 app.Run();
