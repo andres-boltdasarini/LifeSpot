@@ -13,7 +13,13 @@
         <p>Покажем, что происходит прямо сейчас</p>
         <!-- Добавленная форма поиска -->
         <div class="search-container">
-            <input type="text" id="search-field" placeholder="Поиск трансляций...">
+            <input type="text" id="myInput" style="width: 50%;">
+
+<script>
+document.getElementById('myInput').addEventListener('input', function() {
+    alert(this.value);
+});
+</script>
             <button onclick="search()">Найти</button>
         </div>
     </header>
