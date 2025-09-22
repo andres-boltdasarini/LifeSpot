@@ -17,7 +17,7 @@ app.UseRouting();
 
 // Загружаем отдельные элементы для вставки в шаблон: боковое меню и футер
 string footerHtml = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "Views", "Shared", "footer.html"));
-string sideBarHtml = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "Views", "Shared", "sideBar.html"));
+string sideBarHtml = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "Views", "Shared", "sidebar.html"));
 
 app.MapGet("/", async context =>
 {
@@ -52,6 +52,12 @@ app.MapGet("/Static/CSS/index.css", async context =>
 app.MapGet("/Static/JS/index.js", async context =>
 {
     var jsPath = Path.Combine(Directory.GetCurrentDirectory(), "Static", "JS", "index.js");
+    var js = await File.ReadAllTextAsync(jsPath);
+    await context.Response.WriteAsync(js);
+});
+app.MapGet("/Static/JS/testing.js", async context =>
+{
+    var jsPath = Path.Combine(Directory.GetCurrentDirectory(), "Static", "JS", "testing.js");
     var js = await File.ReadAllTextAsync(jsPath);
     await context.Response.WriteAsync(js);
 });
