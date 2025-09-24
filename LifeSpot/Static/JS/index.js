@@ -18,6 +18,7 @@
 
  }
 
+ function handleSession(){
 // создадим объект Map для хранения сессии
 let session =  new Map();
 // Сохраним UserAgent
@@ -44,3 +45,4 @@ else{
 for (let result of session){
    console.log(result)
 }
+ }
