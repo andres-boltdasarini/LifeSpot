@@ -6,10 +6,16 @@
         <link href="../Static/CSS/index.css" rel="stylesheet" type="text/css">
         <script src="../Static/JS/index.js"></script>
         <script>
-            // let session = handleSession();
-            // sessionLog(session)
+            // Проверка на возраст
+            checkAge();
 
-            // Функция объявлена через declaration
+            // сохранение сессии
+            handleSession()
+
+            // вывод данных сессии в консоль
+            sessionLog();
+
+            // функция для получения пользовательского ввода
             const inputParseFunction = function () {
                 return document.getElementsByTagName('input')[0].value.toLowerCase();
             }
