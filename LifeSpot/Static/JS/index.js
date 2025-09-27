@@ -5,7 +5,7 @@ let sessionLog = function logSession(session) {
         console.log(result)
     }
 }
-function filterContent(inputParseFunction) { // в этот параметр будет передана ФУНКЦИЯ парсинга пользовательского ввода
+function filterContent() { // в этот параметр будет передана ФУНКЦИЯ парсинга пользовательского ввода
 
     let elements = document.getElementsByClassName('video-container');
 
