@@ -72,3 +72,10 @@ body {
     font-size: 16px;
 }
 
+.review-container,.review-button{
+    display: inline-block;
+    margin-top: 0.5em;
+    padding-left: 1%;
+    padding-top: 1%;
+ }
+
