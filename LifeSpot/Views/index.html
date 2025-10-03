@@ -7,11 +7,8 @@
         
         <script type="text/javascript" src="../Static/JS/index.js"></script>
         <script>
-            // Проверка на возраст
-            // checkAge();
-           
-            // вывод данных сессии в консоль
-            sessionLog();
+            // обработка сессии
+            handleSession(logger,  checker /* Коллбек-функции */);
           
             // функция для получения пользовательского ввода   
             const inputParseFunction = function(){
