@@ -91,3 +91,40 @@ function addLike(id) {
     // Обновим текст элемента
     element.innerText = array.join(' ')
 }
+
+// Глобальные переменные для слайдера
+let currentSlide = 0;
+let slides = [];
+let totalSlides = 0;
+
+function showSlide(index) {
+    // Скрываем все слайды
+    slides.forEach(slide => {
+        slide.style.display = 'none';
+    });
+
+    // Показываем текущий слайд
+    if (slides[index]) {
+        slides[index].style.display = 'block';
+    }
+}
+
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    showSlide(currentSlide);
+}
+
+function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    showSlide(currentSlide);
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    slides = document.querySelectorAll('.slide');
+    totalSlides = slides.length;
+
+    // Инициализация слайдера
+    if (totalSlides > 0) {
+        showSlide(currentSlide);
+    }
+});
