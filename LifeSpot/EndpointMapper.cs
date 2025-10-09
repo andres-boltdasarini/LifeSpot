@@ -7,10 +7,11 @@ public static class EndpointMapper
     // Загружаем общие элементы один раз при старте приложения
     private static readonly string FooterHtml = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "Views", "Shared", "footer.html"));
     private static readonly string SideBarHtml = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "Views", "Shared", "sidebar.html"));
+    private static readonly string sliderHtml = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "Views", "Shared", "slider.html"));
 
-    /// <summary>
-    /// Маппинг HTML страниц
-    /// </summary>
+
+    // Маппинг HTML страниц
+
     public static void MapHtmlPages(this WebApplication app)
     {
         app.MapGet("/", async context =>
@@ -32,9 +33,8 @@ public static class EndpointMapper
         });
     }
 
-    /// <summary>
-    /// Маппинг статических файлов (CSS)
-    /// </summary>
+
+    // Маппинг статических файлов (CSS)
     public static void MapCssFiles(this WebApplication app)
     {
         app.MapGet("/Static/CSS/index.css", async context =>
@@ -45,9 +45,8 @@ public static class EndpointMapper
         });
     }
 
-    /// <summary>
-    /// Маппинг JavaScript файлов
-    /// </summary>
+// Маппинг JavaScript файлов
+
     public static void MapJsFiles(this WebApplication app)
     {
         app.MapGet("/Static/JS/index.js", async context =>
@@ -72,19 +71,31 @@ public static class EndpointMapper
         });
     }
 
-    /// <summary>
-    /// Маппинг всех эндпоинтов
-    /// </summary>
+    // Маппинг изображений
+    public static void MapImageFiles(this WebApplication app)
+    {
+        app.MapGet("/Static/Images/{imageName}", async context =>
+        {
+            var imageName = context.Request.RouteValues["imageName"]?.ToString();
+            var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "Static", "Images", imageName);
+            await context.Response.SendFileAsync(imagePath);
+        });
+    }
+
+
+    // Маппинг всех эндпоинтов
+
     public static void MapAllEndpoints(this WebApplication app)
     {
         app.MapHtmlPages();
         app.MapCssFiles();
         app.MapJsFiles();
+        app.MapImageFiles();
     }
 
-    /// <summary>
-    /// Вспомогательный метод для загрузки HTML с применением макета
-    /// </summary>
+
+    // Вспомогательный метод для загрузки HTML с применением макета
+
     private static async Task<string> GetHtmlWithLayout(string viewName)
     {
         var viewPath = Path.Combine(Directory.GetCurrentDirectory(), "Views", viewName);
@@ -93,6 +104,7 @@ public static class EndpointMapper
         return new StringBuilder(htmlTemplate)
             .Replace("<!--SIDEBAR-->", SideBarHtml)
             .Replace("<!--FOOTER-->", FooterHtml)
+                               .Replace("<!--SLIDER-->", sliderHtml)
             .ToString();
     }
 }
